@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace AdventOfCodeCSharp.Day1
+﻿namespace AdventOfCodeCSharp.Day1
 {
     public static class Day1Solution
     {
