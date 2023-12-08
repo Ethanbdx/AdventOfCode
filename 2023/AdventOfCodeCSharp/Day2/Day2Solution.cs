@@ -17,7 +17,7 @@ namespace AdventOfCodeCSharp.Day2
                 {"blue", 14 }
             };
 
-            while(!streamReader.EndOfStream)
+            while (!streamReader.EndOfStream)
             {
                 var line = streamReader.ReadLine();
                 var gameInputs = line.Split(":");
@@ -25,11 +25,11 @@ namespace AdventOfCodeCSharp.Day2
                 var isGamePossible = true;
 
                 var reveals = gameInputs[1].Split(';');
-                foreach(var reveal in reveals)
+                foreach (var reveal in reveals)
                 {
-                    
+
                     var cubesRevealed = reveal.Split(',');
-                    foreach(var rawCubeInput in cubesRevealed)
+                    foreach (var rawCubeInput in cubesRevealed)
                     {
                         var cubeInput = rawCubeInput.Trim().Split(' ');
                         var amount = int.Parse(cubeInput[0]);
@@ -40,7 +40,7 @@ namespace AdventOfCodeCSharp.Day2
                             Console.WriteLine($"[Game {gameId}] - {color} exceeded maximum value. Value: {amount}, Max: {cubeMaxAmounts[color]}");
                             break;
                         }
-                    }            
+                    }
                 }
 
                 if (isGamePossible)
@@ -49,6 +49,48 @@ namespace AdventOfCodeCSharp.Day2
                 }
             }
             return gameIdSum;
+        }
+
+        public static int SolvePart2()
+        {
+            var streamReader = new StreamReader("./Day2/Day2Input.txt");
+
+            var gamePowerSum = 0;
+
+            while (!streamReader.EndOfStream)
+            {
+                var line = streamReader.ReadLine();
+                var gameInputs = line.Split(":");
+                var gameId = int.Parse(gameInputs[0].Substring(4));
+
+                var cubeMinAmounts = new Dictionary<string, int>
+                    {
+                        {"red", 0 },
+                        {"green", 0 },
+                        {"blue", 0 }
+                    };
+
+                var reveals = gameInputs[1].Split(';');
+                foreach (var reveal in reveals)
+                {
+                    var cubesRevealed = reveal.Split(',');
+                    foreach (var rawCubeInput in cubesRevealed)
+                    {
+                        var cubeInput = rawCubeInput.Trim().Split(' ');
+                        var amount = int.Parse(cubeInput[0]);
+                        var color = cubeInput[1];
+
+                        if (!cubeMinAmounts.ContainsKey(color) || cubeMinAmounts[color] < amount)
+                        {
+                            cubeMinAmounts[color] = amount;
+                        }
+                    }
+                }
+
+                gamePowerSum += cubeMinAmounts.Values.Aggregate(1, (sum, x) => sum * x);
+            }
+
+            return gamePowerSum;
         }
     }
 }
