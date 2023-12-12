@@ -60,8 +60,6 @@ namespace AdventOfCodeCSharp.Day3
                 lines.Add(line);
             }
 
-            var starPositions = new List<Tuple<int, int>>();
-
             //Loop through and determine if current position is a '*'
             for (int i = 0; i < lines.Count; i++)
             {
@@ -73,7 +71,7 @@ namespace AdventOfCodeCSharp.Day3
                         if (adjNumbers.Count == 2)
                         {
                             Console.WriteLine($"Found {adjNumbers.Count} numbers adjacent to * at row: {i}, column {j}");
-                            foreach(var num in adjNumbers) 
+                            foreach (var num in adjNumbers)
                             {
                                 Console.WriteLine($"Number Found: {num}");
                             }
@@ -192,14 +190,14 @@ namespace AdventOfCodeCSharp.Day3
                     var numberBuilder = new List<char>();
                     int seekLeft = j - 1;
                     int seekRight = j + 1;
-                    while(isValidPos(i - 1, seekLeft, n, m) && char.IsDigit(arr[i - 1][seekLeft])) 
+                    while (isValidPos(i - 1, seekLeft, n, m) && char.IsDigit(arr[i - 1][seekLeft]))
                     {
                         numberBuilder.Add(arr[i - 1][seekLeft]);
                         seekLeft--;
                     }
                     numberBuilder.Reverse();
                     numberBuilder.Add(arr[i - 1][j]);
-                    while(isValidPos(i - 1, seekRight, n, m) && char.IsDigit(arr[i - 1][seekRight])) 
+                    while (isValidPos(i - 1, seekRight, n, m) && char.IsDigit(arr[i - 1][seekRight]))
                     {
                         numberBuilder.Add(arr[i - 1][seekRight]);
                         seekRight++;
@@ -207,16 +205,16 @@ namespace AdventOfCodeCSharp.Day3
 
                     adjNumbers.Add(int.Parse(string.Concat(numberBuilder)));
                 }
-                else 
+                else
                 {
                     //Diag left
-                    if (isValidPos(i - 1, j - 1, n, m) && char.IsDigit(arr[i - 1][j - 1])) 
+                    if (isValidPos(i - 1, j - 1, n, m) && char.IsDigit(arr[i - 1][j - 1]))
                     {
                         var numberBuilder = new StringBuilder();
                         numberBuilder.Append(arr[i - 1][j - 1]);
                         int seek = j - 2;
                         //seek left then reverse
-                        while(isValidPos(i - 1, seek, n, m) && char.IsDigit(arr[i - 1][seek])) 
+                        while (isValidPos(i - 1, seek, n, m) && char.IsDigit(arr[i - 1][seek]))
                         {
                             numberBuilder.Append(arr[i - 1][seek]);
                             seek--;
@@ -225,12 +223,12 @@ namespace AdventOfCodeCSharp.Day3
                     }
 
                     //Diag right
-                    if (isValidPos(i - 1, j + 1, n, m) && char.IsDigit(arr[i - 1][j + 1])) 
+                    if (isValidPos(i - 1, j + 1, n, m) && char.IsDigit(arr[i - 1][j + 1]))
                     {
                         var numberBuilder = new StringBuilder();
                         numberBuilder.Append(arr[i - 1][j + 1]);
                         int seek = j + 2;
-                        while(isValidPos(i - 1, seek, n, m) && char.IsDigit(arr[i - 1][seek])) 
+                        while (isValidPos(i - 1, seek, n, m) && char.IsDigit(arr[i - 1][seek]))
                         {
                             numberBuilder.Append(arr[i - 1][seek]);
                             seek++;
@@ -240,20 +238,20 @@ namespace AdventOfCodeCSharp.Day3
                     }
                 }
             }
-        
+
             //check left
-            if(isValidPos(i, j - 1, n, m)) 
+            if (isValidPos(i, j - 1, n, m))
             {
                 var currentPos = arr[i][j - 1];
                 //seek left until not digit and reverse
-                if(char.IsDigit(currentPos)) 
+                if (char.IsDigit(currentPos))
                 {
-                    var numberBuilder = new List<char> 
+                    var numberBuilder = new List<char>
                     {
                         currentPos
                     };
                     int seek = j - 2;
-                    while(isValidPos(i, seek, n, m) && char.IsDigit(arr[i][seek])) 
+                    while (isValidPos(i, seek, n, m) && char.IsDigit(arr[i][seek]))
                     {
                         numberBuilder.Add(arr[i][seek]);
                         seek--;
@@ -264,18 +262,18 @@ namespace AdventOfCodeCSharp.Day3
             }
 
             //check right
-            if(isValidPos(i, j + 1, n, m)) 
+            if (isValidPos(i, j + 1, n, m))
             {
                 var currentPos = arr[i][j + 1];
                 //seek right until not digit
-                if(char.IsDigit(currentPos)) 
+                if (char.IsDigit(currentPos))
                 {
-                    var numberBuilder = new List<char> 
+                    var numberBuilder = new List<char>
                     {
                         currentPos
                     };
                     int seek = j + 2;
-                    while(isValidPos(i, seek, n, m) && char.IsDigit(arr[i][seek])) 
+                    while (isValidPos(i, seek, n, m) && char.IsDigit(arr[i][seek]))
                     {
                         numberBuilder.Add(arr[i][seek]);
                         seek++;
@@ -293,14 +291,14 @@ namespace AdventOfCodeCSharp.Day3
                     var numberBuilder = new List<char>();
                     int seekLeft = j - 1;
                     int seekRight = j + 1;
-                    while(isValidPos(i + 1, seekLeft, n, m) && char.IsDigit(arr[i + 1][seekLeft])) 
+                    while (isValidPos(i + 1, seekLeft, n, m) && char.IsDigit(arr[i + 1][seekLeft]))
                     {
                         numberBuilder.Add(arr[i + 1][seekLeft]);
                         seekLeft--;
                     }
                     numberBuilder.Reverse();
                     numberBuilder.Add(arr[i + 1][j]);
-                    while(isValidPos(i + 1, seekRight, n, m) && char.IsDigit(arr[i + 1][seekRight])) 
+                    while (isValidPos(i + 1, seekRight, n, m) && char.IsDigit(arr[i + 1][seekRight]))
                     {
                         numberBuilder.Add(arr[i + 1][seekRight]);
                         seekRight++;
@@ -308,16 +306,16 @@ namespace AdventOfCodeCSharp.Day3
 
                     adjNumbers.Add(int.Parse(string.Concat(numberBuilder)));
                 }
-                else 
+                else
                 {
                     //Diag left
-                    if (isValidPos(i + 1, j - 1, n, m) && char.IsDigit(arr[i + 1][j - 1])) 
+                    if (isValidPos(i + 1, j - 1, n, m) && char.IsDigit(arr[i + 1][j - 1]))
                     {
                         var numberBuilder = new StringBuilder();
                         numberBuilder.Append(arr[i + 1][j - 1]);
                         int seek = j - 2;
                         //seek left then reverse
-                        while(isValidPos(i + 1, seek, n, m) && char.IsDigit(arr[i + 1][seek])) 
+                        while (isValidPos(i + 1, seek, n, m) && char.IsDigit(arr[i + 1][seek]))
                         {
                             numberBuilder.Append(arr[i + 1][seek]);
                             seek--;
@@ -326,12 +324,12 @@ namespace AdventOfCodeCSharp.Day3
                     }
 
                     //Diag right
-                    if (isValidPos(i + 1, j + 1, n, m) && char.IsDigit(arr[i + 1][j + 1])) 
+                    if (isValidPos(i + 1, j + 1, n, m) && char.IsDigit(arr[i + 1][j + 1]))
                     {
                         var numberBuilder = new StringBuilder();
                         numberBuilder.Append(arr[i + 1][j + 1]);
                         int seek = j + 2;
-                        while(isValidPos(i + 1, seek, n, m) && char.IsDigit(arr[i + 1][seek])) 
+                        while (isValidPos(i + 1, seek, n, m) && char.IsDigit(arr[i + 1][seek]))
                         {
                             numberBuilder.Append(arr[i + 1][seek]);
                             seek++;
